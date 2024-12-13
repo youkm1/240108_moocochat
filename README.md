@@ -35,12 +35,9 @@ MSA(Microservice Architecture) 전환을 고려하여 설계된 실시간 채팅
 
 - 프레임워크: NestJS
 
-- 데이터베이스:
-</br>
-</tr>PostgreSQL (이중 DB 구조)
-
-</tr></tr>Core DB: 사용자, 채팅방, 컨텐츠 관리
-</tr></tr>Chat DB: 메시지 이력, 상호작용
+- 데이터베이스: PostgreSQL (이중 DB 구조)
+</br></tr>Core DB: 사용자, 채팅방, 컨텐츠 관리
+</br></tr>Chat DB: 메시지 이력, 상호작용
 
 </br>
 
