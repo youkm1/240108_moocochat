@@ -1,6 +1,77 @@
 # 실시간 채팅 서비스 운영
 
 MSA(Microservice Architecture) 전환을 고려하여 설계된 실시간 채팅 및 컨텐츠 관리 기능을 제공하는 NestJS 기반 애플리케이션입니다. 본 시스템은 채팅과 핵심 데이터 관리를 위한 다중 데이터베이스 구조를 활용합니다.
+[Uploading Architecture Diagram.mermaidgraph TD
+    subgraph "Client Layer"
+        Client[Web Client]
+        WebSocket[WebSocket Client]
+    end
+
+    subgraph "API Gateway Layer"
+        API[API Gateway]
+        WSGateway[WebSocket Gateway]
+    end
+
+    subgraph "Service Layer"
+        UserService[User Service]
+        ChatService[Chat Service]
+        ContentService[Content Service]
+    end
+
+    subgraph "Data Access Layer"
+        UserRepo[User Repository]
+        ChatRepo[Chat Repository]
+        ContentRepo[Content Repository]
+        ChatRoomRepo[ChatRoom Repository]
+    end
+
+    subgraph "Database Layer"
+        CoreDB[(Core Database)]
+        ChatDB[(Chat Database)]
+    end
+
+    subgraph "Cache Layer"
+        Redis[(Redis)]
+    end
+
+    %% Client to Gateway Connections
+    Client --> API
+    WebSocket --> WSGateway
+
+    %% Gateway to Service Connections
+    API --> UserService
+    API --> ChatService
+    API --> ContentService
+    WSGateway --> ChatService
+
+    %% Service to Repository Connections
+    UserService --> UserRepo
+    ChatService --> ChatRepo
+    ChatService --> ChatRoomRepo
+    ContentService --> ContentRepo
+
+    %% Repository to Database Connections
+    UserRepo --> CoreDB
+    ChatRoomRepo --> CoreDB
+    ContentRepo --> CoreDB
+    ChatRepo --> ChatDB
+
+    %% Cache Connections
+    ChatService --> Redis
+    WSGateway --> Redis
+
+    %% Styling
+    classDef gateway fill:#f9f,stroke:#333,stroke-width:2px
+    classDef service fill:#bbf,stroke:#333,stroke-width:2px
+    classDef database fill:#ddd,stroke:#333,stroke-width:2px
+    classDef cache fill:#fdd,stroke:#333,stroke-width:2px
+
+    class API,WSGateway gateway
+    class UserService,ChatService,ContentService service
+    class CoreDB,ChatDB database
+    class Redis cache
+…]()
+
 
 <h1>주요 기능</h1>
 <h2>실시간 채팅</h2>
