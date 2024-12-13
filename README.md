@@ -39,16 +39,12 @@ MSA(Microservice Architecture) 전환을 고려하여 설계된 실시간 채팅
 </br></tr>Core DB: 사용자, 채팅방, 컨텐츠 관리
 </br></tr>Chat DB: 메시지 이력, 상호작용
 
-</br>
-
-- 실시간 통신:
-
-</tr>Socket.IO
-</tr>수평 확장을 위한 Redis Adapter
+- 실시간 통신: Socket.IO
+</br></tr>수평 확장을 위한 Redis Adapter
 
 
-ORM: TypeORM (Repository 패턴 적용)
-뷰 엔진: Handlebars (HBS)
+- ORM: TypeORM (Repository 패턴 적용)
+- 뷰 엔진: Handlebars (HBS)
 
 데이터베이스 구조
 Core 데이터베이스
